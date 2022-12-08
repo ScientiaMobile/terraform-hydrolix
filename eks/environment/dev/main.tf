@@ -10,7 +10,7 @@ module "eks" {
   cluster_name             = local.cluster_name
   node_group_instance_type = var.node_group_instance_type
 
-  # vexplicit dependency on vpn module
+  # explicit dependency on vpc module
   vpc_id                = module.vpc.vpc_id
   public_subnets        = module.vpc.public_subnets
   private_subnets       = module.vpc.private_subnets
