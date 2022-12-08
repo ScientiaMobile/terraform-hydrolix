@@ -78,6 +78,6 @@ aws eks update-kubeconfig --region <region-code> --name <my-cluster>
 
 ### TODO
 - Add a hydrolix kustomize deployment 
-- Add S3 backend for (terraform state) [https://developer.hashicorp.com/terraform/language/settings/backends/configuration] with an example
+- Add S3 backend for (terraform state)[https://developer.hashicorp.com/terraform/language/settings/backends/configuration] with an example
 - Provide a kubeconfig output for eks
 - Add ACK controller module with external postgres & external postgres from snapshot
