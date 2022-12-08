@@ -7,6 +7,6 @@ Each provider has a number of environments, that are used to build different sca
 ### TODO
  - add EKS: prod, prod + AWS ACK RDS examples
  - add GKE 
- - add Asure 
+ - add Azure 
 
 
