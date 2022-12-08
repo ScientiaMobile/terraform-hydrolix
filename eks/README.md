@@ -1,6 +1,6 @@
 # Terraform EKS modules
 
-This terraform script has been split into reusable modules. Each module is self contained and relies on the variables.tf values being passed in order to create the underlying resources.
+The terraform script has been split into reusable modules. Each module is self contained and relies on the variables.tf values being passed in order to create the underlying resources.
 
 
 ## Default workspaces
@@ -10,7 +10,11 @@ You need to navigate to an environment i.e `dev` and run `terraform` command for
 Please check the environment variables.tf i.e `environment/dev/variables.tf` for default vaules. You can override (or simply change the defaults), for example 
 
 ```bash
+# cd environment/dev
+terraform plan -var 'cluster_name=my-cluster-name'
+
 terraform apply -var 'cluster_name=my-cluster-name'
+
 ```
 
 ## Usage 
