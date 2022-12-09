@@ -56,8 +56,8 @@ module "eks" {
       vpc_security_group_ids = [var.vpc_security_group_id]
 
       instance_types       = [var.node_group_instance_type]      
-      min_size     = 3
-      max_size     = 10
+      min_size     = 0
+      max_size     = 30
       desired_size = 3
       ebs_optimized  = false
       dedicated                            = true
