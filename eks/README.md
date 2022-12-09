@@ -28,6 +28,8 @@ terraform plan
 terrform apply
 
 # finished with the environment?
+# you can run again if you see errors
+# S3 bucket content needs to be manually deleted via AWS console
 terraform destroy
 ```
 
