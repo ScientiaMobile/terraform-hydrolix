@@ -1,7 +1,8 @@
 # Create EKS cluster and dependencies 
 
 locals {
-  cluster_name = "hdx-${var.cluster_name}"
+  # change to meet your naming standards - this format handles multi region
+  cluster_name = "hdx-${var.cluster_name}-${var.aws_region}"
 }
 
 module "eks" {

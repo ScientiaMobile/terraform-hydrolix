@@ -21,5 +21,6 @@ variable "cluster_name" {
 variable "node_group_instance_type" {
   description = "NodeGroup Instance type"
   type        = string
+  # for larger trials 4xlarge or 9xlarge in production
   default     = "c5n.2xlarge"
 }
