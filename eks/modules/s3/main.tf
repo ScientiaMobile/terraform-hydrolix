@@ -24,26 +24,38 @@ resource "aws_iam_policy" "hdx" {
   name = "${var.cluster_name}-bucket"
 
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Sid":"ListObjectsInBucket",
-        "Effect": "Allow",
-        "Action": "s3:ListBucket",
-        "Resource": [
+        "Sid" : "ListObjectsInBucket",
+        "Effect" : "Allow",
+        "Action" : "s3:ListBucket",
+        "Resource" : [
           "${aws_s3_bucket.hdx.arn}",
           "arn:aws:s3:::hdx-public"
-        ]  
+        ]
       },
       {
-        "Sid":"AllObjectActions",
-        "Effect": "Allow",
-        "Action": "s3:*Object",
-        "Resource": [
+        "Sid" : "AllObjectActions",
+        "Effect" : "Allow",
+        "Action" : "s3:*Object",
+        "Resource" : [
           "${aws_s3_bucket.hdx.arn}/*",
           "arn:aws:s3:::hdx-public/*"
-        ]  
-      }      
+        ]
+      },
+      {
+        "Sid" : "KMSAccess",
+        "Action" : [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:DescribeKey",
+          "kms:GenerateDataKey"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow"
+      }
     ]
   })
 }
