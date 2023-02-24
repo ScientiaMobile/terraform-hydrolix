@@ -1,15 +1,15 @@
 # Create EKS Cluster - EKS Module - Variables Collection (Required and Optional)
 
 variable "cluster_name" {
-  type  = string
+  type = string
 }
 
 variable "node_group_instance_type" {
-  type  = string
+  type = string
 }
 
 variable "vpc_id" {
-  type  = string
+  type = string
 }
 
 variable "public_subnets" {

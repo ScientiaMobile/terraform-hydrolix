@@ -14,3 +14,8 @@ output "cluster_name" {
   description = "Kubernetes Cluster Name"
   value       = module.eks.cluster_name
 }
+
+output "external_rds_postgres_endpoint" {
+  description = "AWS RDS endpoint"
+  value       = module.external_rds_postgres.external_rds_postgres_endpoint
+}

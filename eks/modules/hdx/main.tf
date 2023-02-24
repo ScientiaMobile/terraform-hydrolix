@@ -14,6 +14,6 @@ resource "kubernetes_storage_class_v1" "gp3" {
   reclaim_policy         = "Delete"
   volume_binding_mode    = "WaitForFirstConsumer"
   parameters = {
-    type      = "gp3"
+    type = "gp3"
   }
 }

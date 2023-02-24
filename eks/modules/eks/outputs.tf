@@ -45,6 +45,11 @@ output "cluster_primary_security_group_id" {
   value       = module.eks.cluster_primary_security_group_id
 }
 
+output "node_security_group_id" {
+  description = "Node security group that was created by Amazon EKS for the cluster"
+  value       = module.eks.node_security_group_id
+}
+
 output "oidc_provider" {
   description = "The OpenID Connect identity provider (issuer URL without leading `https://`)"
   value       = module.eks.oidc_provider

@@ -29,13 +29,24 @@ module "s3" {
 }
 
 module "autoscaler" {
-  source = "../../modules/autoscaler"
+  source       = "../../modules/autoscaler"
+  cluster_name = local.cluster_name
+  region       = var.aws_region
 
   # explicit dependencies on eks module
-  cluster_name  = module.eks.cluster_name
   oidc_provider = module.eks.oidc_provider
+}
 
-  region = var.aws_region
+module "external_rds_postgres" {
+  source = "../../modules/rds"
+
+  cluster_name      = local.cluster_name
+  db_password       = var.db_password
+  db_instance_class = var.db_instance_class
+
+  # explicit dependencies on vpc module
+  vpc_id     = module.vpc.vpc_id  
+  subnet_ids = module.vpc.private_subnets
 }
 
 module "hdx" {

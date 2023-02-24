@@ -4,7 +4,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   cluster_version = "1.24"
-  volume_size = 128
+  volume_size     = 128
 }
 
 module "eks" {
@@ -17,20 +17,21 @@ module "eks" {
   vpc_id                   = var.vpc_id
   control_plane_subnet_ids = var.private_subnets
   subnet_ids               = var.public_subnets
-  
+
   cluster_addons = {
     aws-ebs-csi-driver = {
       service_account_role_arn = aws_iam_role.aws-ebs-csi-driver-role.arn
     }
-    vpc-cni = {}  
+    vpc-cni = {}
   }
 
-  create_iam_role          = true
-  iam_role_name            = "${var.cluster_name}-cluster-service-role"
-  iam_role_use_name_prefix = false
+  create_iam_role             = true
+  iam_role_name               = "${var.cluster_name}-cluster-service-role"
+  iam_role_use_name_prefix    = false
+  create_cloudwatch_log_group = false
 
   # enable_irsa = true
-  
+
   eks_managed_node_group_defaults = {
     # See https://github.com/aws/containers-roadmap/issues/1666 for more context
     iam_role_attach_cni_policy = true
@@ -54,14 +55,14 @@ module "eks" {
 
       subnet_ids = var.private_subnets
       # role creation and permission are handle automatically
-      iam_role_name     = "${var.cluster_name}-node-group"
+      iam_role_name          = "${var.cluster_name}-node-group"
       vpc_security_group_ids = [var.vpc_security_group_id]
 
-      instance_types       = [var.node_group_instance_type]      
-      min_size     = 1
-      max_size     = 30
-      desired_size = 3
-      ebs_optimized  = false
+      instance_types                       = [var.node_group_instance_type]
+      min_size                             = 1
+      max_size                             = 30
+      desired_size                         = 3
+      ebs_optimized                        = false
       dedicated                            = true
       exclude_from_external_load_balancers = true
       iam_role_use_name_prefix             = false
@@ -81,13 +82,13 @@ module "eks" {
       }
 
       tags = {
-       "k8s.io/cluster-autoscaler/enabled" = true,
-       "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"        
+        "k8s.io/cluster-autoscaler/enabled"             = true,
+        "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
       }
     }
   }
-  
-   aws_auth_users = [
+
+  aws_auth_users = [
     {
       userarn  = data.aws_caller_identity.current.arn
       username = data.aws_caller_identity.current.user_id

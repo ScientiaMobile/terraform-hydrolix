@@ -5,9 +5,9 @@ The terraform script has been split into reusable modules. Each module is self c
 
 ## Default workspaces
 
-You need to navigate to an environment i.e `dev` and run `terraform` command for that location. Each environment can have a different set of modules & variables associated with it. For example, a `dev` setup may not need `autoscaler` but `prod` would certainly need to include that module. Each environment acts as the default terraform `workspace` with different states.
+You need to navigate to an environment i.e `dev` and run `terraform` command for that location. Each environment can have a different set of modules & variables associated with it. For example, a `dev` setup does not need an external `rds` instace but `production` would certainly need to include that module. Each environment acts as the similar to having sperate terraform `workspace` with different states.
 
-Please check the environment variables.tf i.e `environment/dev/variables.tf` for default vaules. You can override (or simply change the defaults), for example 
+Please check the environment variables.tf i.e `environment/dev/variables.tf` for default vaules. You can override or simply change the default values. 
 
 ```bash
 # cd environment/dev
@@ -53,7 +53,12 @@ aws eks update-kubeconfig --region <region-code> --name <my-cluster>
     │   │   ├── providers.tf
     │   │   ├── terraform.tf
     │   │   └── variables.tf
-    │   └── prod
+    │   └── production
+    │   │   ├── main.tf
+    │   │   ├── outputs.tf
+    │   │   ├── providers.tf
+    │   │   ├── terraform.tf
+    │   │   └── variables.tf   
     └── modules
         ├── autoscaler
         │   ├── iam.tf
@@ -68,6 +73,10 @@ aws eks update-kubeconfig --region <region-code> --name <my-cluster>
         │   ├── iam.tf
         │   ├── main.tf
         │   └── variables.tf
+        ├── rds
+        │   ├── main.tf
+        │   ├── outputs.tf        
+        │   └── variables.tf        
         ├── s3
         │   ├── main.tf
         │   └── variables.tf
@@ -79,7 +88,5 @@ aws eks update-kubeconfig --region <region-code> --name <my-cluster>
 ```
 
 ### TODO
-- Add a hydrolix kustomize deployment 
 - Add S3 backend for [terraform state](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) with an example
-- Provide a kubeconfig output for eks
-- Add ACK controller module with external postgres & external postgres from snapshot
+- Document external VPC usage

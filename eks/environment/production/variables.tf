@@ -15,12 +15,29 @@ variable "aws_region" {
 variable "cluster_name" {
   description = "EKS cluster name"
   type        = string
-  default     = "support"
+  default     = "production"
 }
 
 variable "node_group_instance_type" {
   description = "NodeGroup Instance type"
   type        = string
-  # for larger trials 4xlarge or 9xlarge in production
-  default = "c5n.2xlarge"
+
+  # recommended 9xlarge in production
+  default = "c5n.9xlarge"
+}
+
+variable "db_password" {
+  description = "Postgres ROOT password"
+  type        = string
+ 
+  # rds password contstraints https://github.com/awsdocs/aws-cloudformation-user-guide/issues/1055 
+  default = "insecurepassword"
+}
+
+variable "db_instance_class" {
+  description = "DB instance class"
+  type        = string
+
+  #recommended production type
+  default = "db.m5.xlarge"
 }
