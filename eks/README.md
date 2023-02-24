@@ -5,7 +5,7 @@ The terraform script has been split into reusable modules. Each module is self c
 
 ## Default workspaces
 
-You need to navigate to an environment i.e `dev` and run `terraform` command for that location. Each environment can have a different set of modules & variables associated with it. For example, a `dev` setup does not need an external `rds` instace but `production` would certainly need to include that module. Each environment acts as the similar to having sperate terraform `workspace` with different states.
+You need to navigate to an environment i.e `dev` and run `terraform` command for that location. Each environment can have a different set of modules & variables associated with it (see `main.tf`). For example, a `dev` setup does not need an external `rds` postgres instance but `production` would and has been included. Each environment acts similar to having sperate terraform `workspace` with different states.
 
 Please check the environment variables.tf i.e `environment/dev/variables.tf` for default vaules. You can override or simply change the default values. 
 
