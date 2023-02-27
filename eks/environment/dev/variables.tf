@@ -15,7 +15,7 @@ variable "aws_region" {
 variable "cluster_name" {
   description = "EKS cluster name"
   type        = string
-  default     = "support"
+  default     = "development"
 }
 
 variable "node_group_instance_type" {
