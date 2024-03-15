@@ -97,6 +97,12 @@ module "eks" {
   ]
 }
 
+
+resource "aws_iam_service_linked_role" "eks" {
+  aws_service_name = "autoscaling.amazonaws.com"
+}
+
+
 # Supporting Resources
 
 resource "aws_kms_key" "ebs" {
@@ -160,3 +166,5 @@ data "aws_iam_policy_document" "ebs" {
     }
   }
 }
+
+

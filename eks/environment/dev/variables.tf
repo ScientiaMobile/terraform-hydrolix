@@ -3,13 +3,13 @@
 variable "profile" {
   description = "AWS credential Profile (normally found in ~/.aws/config)"
   type        = string
-  default     = "default"
+  default     = "aws-hydrolix-dev"
 }
 
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-south-1"
 }
 
 variable "cluster_name" {

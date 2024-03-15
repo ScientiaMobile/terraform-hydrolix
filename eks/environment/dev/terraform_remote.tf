@@ -1,3 +1,5 @@
+
+# "terraform  init" to copy local state to remote state
 #
 # Remote state and lock files
 # Usage: copy this file terraform_remote.tf into any directory that we will use to manage infrastruture or services
@@ -21,6 +23,24 @@ resource "aws_s3_bucket_versioning" "terraform-remote-state" {
 
 }
 
+
+resource "aws_s3_bucket" "terraform-remote-state" {
+  count  = 1 # disable
+  bucket = "com.scientiamobile.hydrolix.terraform-remote-state-dev"
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes  = [grant]
+  }
+
+
+  tags = {
+    Name    = "Hydrolix Terraform State"
+    Product = "Hydrolix"
+  }
+}
+
+
 // Create dynamodb
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   count          = 1 # disable
@@ -43,7 +63,7 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
 // Comment out the below when initializing a new account. 
 // After the first terraform apply (creating the above bucket), enable the new backend
 // and run terraform init
-/*
+
 terraform {
   backend "s3" {
     encrypt = true
@@ -51,9 +71,9 @@ terraform {
     # production bucket should be sans .accountnumber
     bucket         = "com.scientiamobile.hydrolix.terraform-remote-state-dev" 
     dynamodb_table = "terraform-state-lock-dynamo"
-    region         = "us-east-2"
+    region         = "eu-south-1"
     profile        = "aws-hydrolix-dev"
     key            = "terraform/hydrolix/dev" 
   }
 }
-*/
+
