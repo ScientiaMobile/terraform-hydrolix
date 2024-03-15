@@ -7,36 +7,23 @@
 # If we decide we want to lock the entire infrastucture while making changes we ensure that all keys are the same. 
 #  
 
-resource "aws_s3_bucket" "terraform-remote-state" {
+resource "aws_s3_bucket_versioning" "terraform-remote-state" {
   count  = 1 # disable
   bucket = "com.scientiamobile.hydrolix.terraform-remote-state-dev"
 
-  versioning {
-    enabled = true
+  versioning_configuration {
+    status = "Enabled"
   }
 
   lifecycle {
     prevent_destroy = true
-    ignore_changes  = [grant]
   }
 
-  # Enable server-side encryption by default
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
-  tags = {
-    Name    = "Hydrolix Terraform State"
-    Product = "Hydrolix"
-  }
 }
 
 // Create dynamodb
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
+  count          = 1 # disable
   name           = "terraform-state-lock-dynamo"
   hash_key       = "LockID"
   read_capacity  = 20
