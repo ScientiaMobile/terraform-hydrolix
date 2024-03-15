@@ -1,5 +1,10 @@
 .DS_Store
 eks/environment/dev/.terraform*
-eks/environment/dev/terraform*
 eks/environment/production/.terraform*
-eks/environment/production/terraform*
+
+bin/*
+/vendor
+/.env
+coverage.out
+*.env.file
+**/.terraform*/
