@@ -40,6 +40,19 @@ data "aws_caller_identity" "current" {}
         "Condition": {
           "StringEquals": {
             "${var.oidc_provider}:aud": "sts.amazonaws.com",
+            "${var.oidc_provider}:sub": "system:serviceaccount:${var.cluster_name}:merge-controller"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${var.oidc_provider}"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "${var.oidc_provider}:aud": "sts.amazonaws.com",
             "${var.oidc_provider}:sub": "system:serviceaccount:${var.cluster_name}:vector"
           }
         }
