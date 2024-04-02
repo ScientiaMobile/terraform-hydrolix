@@ -86,6 +86,8 @@ aws eks update-kubeconfig --region <region-code> --name <my-cluster>
             └── variable.tf
 
 ```
+### ScientiaMobile DevOps team 
+- Added S3 backend https://github.com/ScientiaMobile/terraform-hydrolix/blob/dev/eks/environment/dev/terraform_remote.tf
 
 ### TODO
 - Add S3 backend for [terraform state](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) with an example
